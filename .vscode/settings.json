@@ -1,0 +1,12 @@
+{
+	"window.title": "olya troitskaya",
+	"css.lint.unknownAtRules": "ignore",
+	"editor.quickSuggestions": {
+		"other": true,
+		"comments": false,
+		"strings": true
+	},
+	"workbench.statusBar.visible": false,
+	"workbench.editor.showTabs": "none",
+	"editor.snippetSuggestions": "top"
+}

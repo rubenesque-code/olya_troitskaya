@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'universaltstd';
+	font-style: normal;
+	font-weight: normal;
+	src: url('/fonts/UniversLTStd.otf');
+	font-display: swap;
+}
+
+* {
+	@apply outline-none focus:outline-none active:outline-none;
+
+	-webkit-tap-highlight-color: transparent;
+}
+
+html {
+	@apply text-black;
+}
+
+/* div {
+	@apply scrollbar scrollbar-track-red-600 scrollbar-thumb-white active:scrollbar-thumb-white;
+} */
+
+::selection {
+	@apply bg-gray-600 text-white;
+}
