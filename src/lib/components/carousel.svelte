@@ -7,23 +7,45 @@
 	import { fade } from 'svelte/transition';
 
 	const config = {
-		interval: 15000,
+		interval: 5000,
 		pauseAfterClick: 20000
 	};
 </script>
 
 <script lang="ts">
 	export let hideSlideCounter = false;
+	export let pause = false;
+	$: console.log('pause:', pause);
 
 	let activeIndex = 0;
 
-	let intervalId: number;
+	let direction: 'prev' | 'next' = 'next';
+
+	let intervalStatus: 'not-init' | 'init' = 'not-init';
+	let intervalId: number | null;
+	$: console.log('intervalId:', intervalId);
 
 	onMount(() => {
 		intervalId = setInterval(() => {
 			goNext();
+			intervalStatus = 'init';
 		}, config.interval);
 	});
+
+	$: if (pause) {
+		if (intervalId) {
+			console.log('CLEARING INTERVAL');
+			clearInterval(intervalId);
+			intervalId = null;
+		}
+	} else if (intervalStatus === 'init' && !pause && !intervalId) {
+		console.log('SET INTERVAL AFTER PAUSE');
+
+		intervalId = setInterval(() => {
+			if (direction === 'next') goNext();
+			else goPrev();
+		}, config.interval);
+	}
 
 	const goNext = () => {
 		activeIndex = activeIndex === images.length - 1 ? 0 : activeIndex + 1;
@@ -34,15 +56,25 @@
 	};
 
 	const handleClick = (type: 'prev' | 'next') => {
-		clearInterval(intervalId);
+		if (intervalId) {
+			clearInterval(intervalId);
+			intervalId = null;
+		}
 
-		type === 'prev' ? goPrev() : goNext();
+		if (type === 'prev') {
+			direction = 'prev';
+			goPrev();
+		} else {
+			direction = 'next';
+			goNext();
+		}
 
-		/* 		setTimeout(() => {
+		setTimeout(() => {
 			intervalId = setInterval(() => {
-				goNext();
+				if (direction === 'next') goNext();
+				else goPrev();
 			}, config.interval);
-		}, config.pauseAfterClick); */
+		}, config.pauseAfterClick);
 	};
 </script>
 

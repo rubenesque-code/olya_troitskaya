@@ -1,7 +1,11 @@
 <script lang="ts" context="module">
 	import { Carousel, Landscape } from '^components';
-	import { sineInOut } from 'svelte/easing';
-	import { slide } from 'svelte/transition';
+
+	// TO DO
+	// - slider reset timer after click
+	// - icon
+	// - structured data.
+	// - contact link.
 
 	// - swipe for touch.
 	// - pause slides on open about on portrait
@@ -10,6 +14,9 @@
 
 	// if requested
 	// - pause button
+
+	// CHECKLIST
+	// - slide counter timer
 </script>
 
 <script lang="ts">
@@ -18,11 +25,16 @@
 
 <div class="flex justify-center bg-bg-primary">
 	<main class="flex h-screen w-full flex-col gap-2 landscape:hidden">
-		<div class="relative flex-grow">
-			<Carousel hideSlideCounter={aboutIsOpen} />
+		<div class="relative flex-grow overflow-hidden">
+			<Carousel bind:hideSlideCounter={aboutIsOpen} bind:pause={aboutIsOpen} />
 
+			{#if aboutIsOpen}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
+				<div class="fixed inset-0 z-10" on:click={() => (aboutIsOpen = false)} />
+			{/if}
 			<div
-				class="absolute bottom-0 h-[48vh] overflow-y-auto bg-bg-primary p-6 transition-transform duration-300 ease-in-out scrollbar-none"
+				class="absolute bottom-0 z-20 h-[48vh] overflow-y-auto bg-bg-primary p-6 transition-transform duration-300 ease-in-out scrollbar-none"
 				style:transform={`translateY(${!aboutIsOpen ? 100 : 0}%)`}
 				style:pointer-events={!aboutIsOpen ? 'none' : 'auto'}
 			>
@@ -79,7 +91,7 @@
 		</div>
 
 		<footer
-			class="absolute bottom-0 z-20 flex w-full items-center justify-between bg-bg-primary px-6 pb-6 pt-4 text-[17px]"
+			class="fixed bottom-0 z-30 flex w-full items-center justify-between bg-bg-primary px-6 py-6 text-[17px]"
 		>
 			<button on:click={() => (aboutIsOpen = !aboutIsOpen)} type="button">About</button>
 
