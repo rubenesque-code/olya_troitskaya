@@ -4,14 +4,17 @@
 	import images from '^content/image-carousel';
 
 	import { Picture } from '^components';
+	import { fade } from 'svelte/transition';
 
 	const config = {
-		interval: 5000,
-		pauseAfterClick: 10000
+		interval: 15000,
+		pauseAfterClick: 20000
 	};
 </script>
 
 <script lang="ts">
+	export let hideSlideCounter = false;
+
 	let activeIndex = 0;
 
 	let intervalId: number;
@@ -35,11 +38,11 @@
 
 		type === 'prev' ? goPrev() : goNext();
 
-		setTimeout(() => {
+		/* 		setTimeout(() => {
 			intervalId = setInterval(() => {
 				goNext();
 			}, config.interval);
-		}, config.pauseAfterClick);
+		}, config.pauseAfterClick); */
 	};
 </script>
 
@@ -68,9 +71,11 @@
 		</div>
 	</div>
 
-	<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full">
-		<p class="text-sm font-light">
-			{activeIndex + 1} / {images.length}
-		</p>
-	</div>
+	{#if !hideSlideCounter}
+		<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full" transition:fade>
+			<p class="text-[11px] font-light">
+				{activeIndex + 1} / {images.length}
+			</p>
+		</div>
+	{/if}
 </div>
