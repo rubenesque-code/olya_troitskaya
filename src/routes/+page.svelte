@@ -14,23 +14,24 @@
 					</p>
 				</div>
 
-				<div class="mt-8">
+				<div class="mt-8 flex flex-col">
 					<h2 class="text-[20px]">Experience</h2>
 
-					<p class="mt-4 flex flex-col gap-8">
+					<p class="mt-4">
 						In her current role as a Lead Designer at Tommy Hilfiger, she oversees a team of 4-6
 						designers and delivers digital and print materials, including marketing campaigns,
 						newsletters, website pages, point-of-sale materials, event collateral, lookbooks,
 						packaging, social media &#8232;and more.
 					</p>
 
-					<p>
+					<p class="mt-8">
 						In her role as a Senior Designer at Burberry within Beauty team she helped to interpret
 						and implement the Burberry Beauty design vision and supported product packaging,
 						campaigns designs and activations related to launches &#8232;of the new products.
 					</p>
 
-					<p>
+					<p class="mt-8">
+						In her role as a Senior Designer at Burberry within Beauty team she helped to interpret
 						In her role as a Senior Freelance Designer at COS she delivered a recent brand update,
 						developing vision and all the assets for a new brand image, including new logo,
 						typographic treatment, packaging and other applications. Prior to that she conducted
@@ -40,7 +41,7 @@
 						approaches to COS packaging and marketing materials.
 					</p>
 
-					<p>
+					<p class="mt-8">
 						Before working for brands as an in-house designer, she has worked for leading design
 						studios such as Zak Group, Fraser Muggeridge Studio, OK-RM and The Beautiful Meme. Her
 						work has been exhibited and presented in several international institutions including

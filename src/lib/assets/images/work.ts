@@ -30,7 +30,7 @@ import cos_paper_bags from '../_files/images/cos-paper_bags.png?w=2400;1800;1200
 import cos_piete_uomo_pamphlets_open from '../_files/images/cos-piete_uomo-pamphlets-open.jpg?w=2400;1800;1200;800;600;400&format=avif;webp;jpg&as=picture&imagetools'
 import cos_pittie_uomo_pamphlets_closed from '../_files/images/cos-pittie_uomo-pamphlets-closed.jpg?w=2400;1800;1200;800;600;400&format=avif;webp;jpg&as=picture&imagetools'
 import cos_store_front from '../_files/images/cos-store_front.jpeg?w=2400;1800;1200;800;600;400&format=avif;webp;jpg&as=picture&imagetools'
-import cos_tape from '../_files/images/cos-tape.jpg'
+import cos_tape from '../_files/images/cos-tape.jpg?w=2400;1800;1200;800;600;400&format=avif;webp;jpg&as=picture&imagetools'
 import cos_to_and_from_cards_closed_and_open from '../_files/images/cos-to_and_from_cards-closed_and_open.jpg?w=2400;1800;1200;800;600;400&format=avif;webp;jpg&as=picture&imagetools'
 import cos_white_bag_carried_by_woman_with_brown_coat from '../_files/images/cos-white_bag-carried_by_woman_with_brown_coat.jpg?w=2400;1800;1200;800;600;400&format=avif;webp;jpg&as=picture&imagetools'
 import cos_white_bag_held_by_woman from '../_files/images/cos-white_bag-held_by_woman.jpg?w=2400;1800;1200;800;600;400&format=avif;webp;jpg&as=picture&imagetools'

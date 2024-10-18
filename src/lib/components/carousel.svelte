@@ -1,21 +1,14 @@
 <script lang="ts" context="module">
-	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
+
+	import images from '^content/image-carousel';
 
 	import { Picture } from '^components';
 
-	import image from '^assets/images';
-
-	let images = [
-		image.work.burberry_pink_item,
-		image.work.coloured_photos,
-		image.work.burberry_pink_item,
-		image.work.coloured_photos
-		/* 		image.work.burberry_pink_item,
-		image.work.coloured_photos,
-		image.work.burberry_pink_item,
-		image.work.coloured_photos */
-	];
+	const config = {
+		interval: 5000,
+		pauseAfterClick: 10000
+	};
 </script>
 
 <script lang="ts">
@@ -26,10 +19,8 @@
 	onMount(() => {
 		intervalId = setInterval(() => {
 			goNext();
-		}, 2000);
+		}, config.interval);
 	});
-
-	// let lastInteraction: number;
 
 	const goNext = () => {
 		activeIndex = activeIndex === images.length - 1 ? 0 : activeIndex + 1;
@@ -40,8 +31,6 @@
 	};
 
 	const handleClick = (type: 'prev' | 'next') => {
-		lastInteraction = Date.now();
-
 		clearInterval(intervalId);
 
 		type === 'prev' ? goPrev() : goNext();
@@ -49,30 +38,39 @@
 		setTimeout(() => {
 			intervalId = setInterval(() => {
 				goNext();
-			}, 2000);
-		}, 8000);
+			}, config.interval);
+		}, config.pauseAfterClick);
 	};
 </script>
 
-<div class="relative h-full w-full overflow-hidden">
-	<button
-		class="absolute left-0 top-0 z-10 h-full w-1/2 cursor-w-resize"
-		on:click={() => handleClick('prev')}
-		type="button"
-	/>
-	<button
-		class="absolute right-0 top-0 z-10 h-full w-1/2 cursor-e-resize"
-		on:click={() => handleClick('next')}
-		type="button"
-	/>
+<div class="relative h-full w-full">
+	<div class="relative h-full w-full overflow-hidden">
+		<button
+			class="absolute left-0 top-0 z-10 h-full w-1/2 cursor-w-resize"
+			on:click={() => handleClick('prev')}
+			type="button"
+		/>
+		<button
+			class="absolute right-0 top-0 z-10 h-full w-1/2 cursor-e-resize"
+			on:click={() => handleClick('next')}
+			type="button"
+		/>
 
-	<div class="flex h-full w-full">
-		{#each images as image, i}
-			{#if activeIndex === i}
-				<div class="h-full max-h-[1200px] w-full shrink-0" transition:fade>
+		<div
+			class="absolute inset-0 flex h-full w-full transition-transform duration-300 ease-linear"
+			style:transform={`translateX(-${activeIndex * 100}%)`}
+		>
+			{#each images as image, i}
+				<div class="h-full w-full shrink-0">
 					<Picture imageClass="w-full h-full object-contain" sizes="50vw" data={image} alt="" />
 				</div>
-			{/if}
-		{/each}
+			{/each}
+		</div>
+	</div>
+
+	<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full">
+		<p class="text-sm font-light">
+			{activeIndex + 1} / {images.length}
+		</p>
 	</div>
 </div>
