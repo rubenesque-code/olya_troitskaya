@@ -15,6 +15,9 @@
 	// if requested
 	// - pause button
 
+	// nice to have
+	// fast but not so fast transition on 0 or end slide
+
 	// CHECKLIST
 	// - slide counter timer
 </script>

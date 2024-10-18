@@ -69,12 +69,12 @@
 			goNext();
 		}
 
-		setTimeout(() => {
+		/* 		setTimeout(() => {
 			intervalId = setInterval(() => {
 				if (direction === 'next') goNext();
 				else goPrev();
 			}, config.interval);
-		}, config.pauseAfterClick);
+		}, config.pauseAfterClick); */
 	};
 </script>
 
