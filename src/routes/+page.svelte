@@ -1,13 +1,11 @@
 <script lang="ts" context="module">
 	import { Carousel } from '^components';
-
-	// import image from '^assets/images';
 </script>
 
 <div class="flex justify-center bg-bg-primary">
-	<main class="flex max-w-[2200px] gap-16 w-full h-screen p-12">
-		<div class="max-w-[490px] h-full max-h-full overflow-y-auto pr-4 scrollbar-none">
-			<div class="flex flex-col leading-relaxed text-[22px] h-full">
+	<main class="flex h-screen w-full max-w-[2200px] gap-16 p-12">
+		<div class="h-full max-h-full max-w-[490px] overflow-y-auto pr-4 scrollbar-none">
+			<div class="flex h-full flex-col text-[22px] leading-relaxed">
 				<div>
 					<p>
 						Olya Troitskaya is a Lead Graphic Designer and Educator based in London. Operating at
@@ -57,13 +55,13 @@
 			</div>
 		</div>
 
-		<div class="w-[2px] bg-black h-full" />
+		<div class="h-full w-[2px] bg-black" />
 
-		<div class="h-full flex flex-col items-end justify-between w-full">
+		<div class="flex h-full w-full flex-col items-end justify-between">
 			<div><button class="text-[20px]" type="button">Contact</button></div>
 
-			<div class="flex-grow p-4 w-full flex flex-col justify-center">
-				<div class="max-h-[1200px] h-full">
+			<div class="flex w-full flex-grow flex-col justify-center p-4">
+				<div class="h-full max-h-[1200px]">
 					<Carousel />
 				</div>
 			</div>
