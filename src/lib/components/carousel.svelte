@@ -98,14 +98,6 @@
 		} else {
 			goNext();
 		}
-
-		setTimeout(() => {
-			intervalId = setInterval(() => {
-				console.log('HANDLE INTERACTION ---> SET_INTERVAL -> GO');
-				if (direction === 'next') goNext();
-				else goPrev();
-			}, config.interval);
-		}, config.delayAfterInteraction);
 	};
 </script>
 
