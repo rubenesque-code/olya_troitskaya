@@ -98,6 +98,14 @@
 		} else {
 			goNext();
 		}
+
+		setTimeout(() => {
+			intervalId = setInterval(() => {
+				console.log('HANDLE INTERACTION ---> SET_INTERVAL -> GO');
+				if (direction === 'next') goNext();
+				else goPrev();
+			}, config.interval);
+		}, config.delayAfterInteraction);
 	};
 </script>
 
@@ -105,19 +113,23 @@
 	class="relative h-full w-full"
 	use:swipe={{ timeframe: 300, minSwipeDistance: 60 }}
 	on:swipe={(e) => {
-		const direction = e.detail.direction === 'left' ? 'next' : 'prev';
+		const direction = e.detail.direction;
 
-		handleInteraction(direction);
+		if (direction !== 'left' && direction !== 'right') {
+			return;
+		}
+
+		handleInteraction(direction === 'left' ? 'next' : 'prev');
 	}}
 >
 	<div class="relative h-full w-full overflow-hidden">
 		<button
-			class="absolute left-0 top-0 z-10 h-full w-1/2 cursor-w-resize"
+			class="absolute left-0 top-0 z-10 h-full w-1/2"
 			on:click={() => handleInteraction('prev')}
 			type="button"
 		/>
 		<button
-			class="absolute right-0 top-0 z-10 h-full w-1/2 cursor-e-resize"
+			class="absolute right-0 top-0 z-10 h-full w-1/2"
 			on:click={() => handleInteraction('next')}
 			type="button"
 		/>
