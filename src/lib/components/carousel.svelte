@@ -40,7 +40,7 @@
 	};
 
 	const handleClick = (type: 'prev' | 'next') => {
-		lastInteraction = Date.now();
+		// lastInteraction = Date.now();
 
 		clearInterval(intervalId);
 
