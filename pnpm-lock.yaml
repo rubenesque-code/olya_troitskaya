@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      svelte-gestures:
+        specifier: ^5.0.6
+        version: 5.0.6
     devDependencies:
       '@sveltejs/adapter-vercel':
         specifier: ^5.4.5
@@ -1645,6 +1649,9 @@ packages:
     peerDependenciesMeta:
       svelte:
         optional: true
+
+  svelte-gestures@5.0.6:
+    resolution: {integrity: sha512-kElJnoZrQtlkXE0O/RcKioz9NP0Sxx05j31ohyosNkydo6NOEsZB85mhoaCxOQNjxN+QPumYWfmIUsznYFjihA==}
 
   svelte-hmr@0.16.0:
     resolution: {integrity: sha512-Gyc7cOS3VJzLlfj7wKS0ZnzDVdv3Pn2IuVeJPk9m2skfhcu5bq3wtIZyQGggr7/Iim5rH5cncyQft/kRLupcnA==}
@@ -3316,6 +3323,8 @@ snapshots:
       postcss-scss: 4.0.9(postcss@8.4.47)
     optionalDependencies:
       svelte: 4.2.19
+
+  svelte-gestures@5.0.6: {}
 
   svelte-hmr@0.16.0(svelte@4.2.19):
     dependencies:

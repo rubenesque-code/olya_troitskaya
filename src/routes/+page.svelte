@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import { Carousel, Landscape } from '^components';
+	import { contact } from '^data';
 
 	// TO DO
 	// - slider reset timer after click
@@ -26,7 +27,7 @@
 <div class="flex justify-center bg-bg-primary">
 	<main class="flex h-screen w-full flex-col gap-2 landscape:hidden">
 		<div class="relative flex-grow overflow-hidden">
-			<Carousel bind:hideSlideCounter={aboutIsOpen} bind:pause={aboutIsOpen} />
+			<Carousel hideSlideCounter={aboutIsOpen} pause={aboutIsOpen} />
 
 			{#if aboutIsOpen}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -95,13 +96,13 @@
 		>
 			<button on:click={() => (aboutIsOpen = !aboutIsOpen)} type="button">About</button>
 
-			<a href="/">Contact</a>
+			<a href={`mailto:${contact.email}`}>Contact</a>
 		</footer>
 
 		<footer class="flex items-center justify-between bg-bg-primary px-6 pb-6 pt-4 text-[17px]">
 			<button type="button">About</button>
 
-			<a href="/">Contact</a>
+			<a href={`mailto:${contact.email}`}>Contact</a>
 		</footer>
 	</main>
 
@@ -115,7 +116,7 @@
 
 			<div class="flex w-full flex-grow flex-col justify-center p-4">
 				<div class="h-full max-h-[1200px]">
-					<Carousel />
+					<!-- <Carousel /> -->
 				</div>
 			</div>
 

@@ -1,50 +1,74 @@
 <script lang="ts" context="module">
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import { swipe } from 'svelte-gestures';
 
 	import images from '^content/image-carousel';
 
 	import { Picture } from '^components';
-	import { fade } from 'svelte/transition';
 
 	const config = {
 		interval: 5000,
-		pauseAfterClick: 20000
+		delayAfterInteraction: 7000,
+		delayAfterPause: 900
 	};
 </script>
 
 <script lang="ts">
 	export let hideSlideCounter = false;
 	export let pause = false;
-	$: console.log('pause:', pause);
 
 	let activeIndex = 0;
 
 	let direction: 'prev' | 'next' = 'next';
 
-	let intervalStatus: 'not-init' | 'init' = 'not-init';
 	let intervalId: number | null;
-	$: console.log('intervalId:', intervalId);
 
 	onMount(() => {
+		console.log('===============================');
+		console.log('MOUNT');
+		console.log('===============================');
+
 		intervalId = setInterval(() => {
+			console.log('MOUNT ---> INTERVAL ---> GO ');
 			goNext();
-			intervalStatus = 'init';
 		}, config.interval);
 	});
 
+	let pauseFlag: 'was paused' | 'idle' = 'idle';
+
 	$: if (pause) {
 		if (intervalId) {
-			console.log('CLEARING INTERVAL');
+			console.log('===============================');
+			console.log('PAUSE');
+			console.log('===============================');
+
 			clearInterval(intervalId);
 			intervalId = null;
-		}
-	} else if (intervalStatus === 'init' && !pause && !intervalId) {
-		console.log('SET INTERVAL AFTER PAUSE');
 
-		intervalId = setInterval(() => {
+			pauseFlag = 'was paused';
+		}
+	}
+
+	// play after pause
+	$: if (!pause && pauseFlag === 'was paused') {
+		console.log('===============================');
+		console.log('WAS PAUSED');
+		console.log('===============================');
+
+		pauseFlag = 'idle';
+
+		setTimeout(() => {
 			if (direction === 'next') goNext();
 			else goPrev();
-		}, config.interval);
+
+			intervalId = setInterval(() => {
+				console.log('WAS PAUSED ---> SET INTERVAL ---> GO');
+
+				if (direction === 'next') goNext();
+				else goPrev();
+			}, config.interval);
+		}, config.delayAfterPause);
 	}
 
 	const goNext = () => {
@@ -55,39 +79,54 @@
 		activeIndex = activeIndex === 0 ? images.length - 1 : activeIndex - 1;
 	};
 
-	const handleClick = (type: 'prev' | 'next') => {
+	const handleInteraction = (type: 'prev' | 'next') => {
+		console.log('===============================');
+		console.log('HANDLE INTERACTION', type);
+		console.log('===============================');
+
 		if (intervalId) {
+			console.log('HANDLE INTERACTION ---> CLEAR INTERVAL', intervalId);
+
 			clearInterval(intervalId);
 			intervalId = null;
 		}
 
+		direction = type;
+
 		if (type === 'prev') {
-			direction = 'prev';
 			goPrev();
 		} else {
-			direction = 'next';
 			goNext();
 		}
 
 		setTimeout(() => {
 			intervalId = setInterval(() => {
+				console.log('HANDLE INTERACTION ---> SET_INTERVAL -> GO');
 				if (direction === 'next') goNext();
 				else goPrev();
 			}, config.interval);
-		}, config.pauseAfterClick);
+		}, config.delayAfterInteraction);
 	};
 </script>
 
-<div class="relative h-full w-full">
+<div
+	class="relative h-full w-full"
+	use:swipe={{ timeframe: 300, minSwipeDistance: 60 }}
+	on:swipe={(e) => {
+		const direction = e.detail.direction === 'left' ? 'next' : 'prev';
+
+		handleInteraction(direction);
+	}}
+>
 	<div class="relative h-full w-full overflow-hidden">
 		<button
 			class="absolute left-0 top-0 z-10 h-full w-1/2 cursor-w-resize"
-			on:click={() => handleClick('prev')}
+			on:click={() => handleInteraction('prev')}
 			type="button"
 		/>
 		<button
 			class="absolute right-0 top-0 z-10 h-full w-1/2 cursor-e-resize"
-			on:click={() => handleClick('next')}
+			on:click={() => handleInteraction('next')}
 			type="button"
 		/>
 
