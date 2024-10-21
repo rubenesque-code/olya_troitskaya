@@ -137,7 +137,7 @@
 			class="absolute inset-0 flex h-full w-full transition-transform duration-300 ease-linear"
 			style:transform={`translateX(-${activeIndex * 100}%)`}
 		>
-			{#each images as image, i}
+			{#each images as image}
 				<div class="h-full w-full shrink-0">
 					<Picture imageClass="w-full h-full object-contain" sizes="50vw" data={image} alt="" />
 				</div>

@@ -6,7 +6,6 @@
 
 	// TO DO
 	// - carousel not working properly
-	// - icon
 	// - structured data.
 
 	// - max size for certain images?
