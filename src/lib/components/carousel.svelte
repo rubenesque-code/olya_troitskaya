@@ -16,9 +16,8 @@
 
 <script lang="ts">
 	export let hideSlideCounter = false;
-	export let pause = false;
-
-	let activeIndex = 0;
+	export let pause = true;
+	export let activeIndex: number;
 
 	let direction: 'prev' | 'next' = 'next';
 
@@ -148,7 +147,7 @@
 
 	{#if !hideSlideCounter}
 		<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full" transition:fade>
-			<p class="text-[11px] font-light">
+			<p class="text-[11px] sm/md:text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[15px]">
 				{activeIndex + 1} / {images.length}
 			</p>
 		</div>

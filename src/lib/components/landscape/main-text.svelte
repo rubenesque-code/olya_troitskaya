@@ -1,5 +1,9 @@
-<div class="h-full max-h-full max-w-[490px] overflow-y-auto pr-4 scrollbar-none portrait:hidden">
-	<div class="flex h-full flex-col text-[22px] leading-relaxed">
+<div
+	class="h-full max-h-full w-full max-w-[33%] overflow-y-auto pr-4 scrollbar-none xl:w-[450px] 2xl:w-[500px] portrait:hidden"
+>
+	<div
+		class="flex h-full flex-col text-[13px] leading-relaxed sm:text-[14px] sm/md:text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]"
+	>
 		<div>
 			<p>
 				Olya Troitskaya is a Lead Graphic Designer and Educator based in London. Operating at the
@@ -9,7 +13,11 @@
 		</div>
 
 		<div class="mt-8 flex flex-col">
-			<h2 class="text-[20px]">Experience</h2>
+			<h2
+				class="text-[12px] leading-relaxed sm:text-[13px] sm/md:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[19px]"
+			>
+				Experience
+			</h2>
 
 			<p class="mt-4">
 				In her current role as Lead Designer at Tommy Hilfiger, she oversees a team of 4-6 designers

@@ -25,5 +25,5 @@ html {
 } */
 
 ::selection {
-	@apply bg-gray-600 text-white;
+	@apply bg-white;
 }
