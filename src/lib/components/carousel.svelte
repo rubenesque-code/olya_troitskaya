@@ -16,7 +16,7 @@
 
 <script lang="ts">
 	export let hideSlideCounter = false;
-	export let pause = true;
+	export let pause = false;
 	export let activeIndex: number;
 
 	let direction: 'prev' | 'next' = 'next';
