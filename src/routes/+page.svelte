@@ -57,7 +57,7 @@
 
 {#if isLandscape !== undefined && rect}
 	<div
-		class="fixed"
+		class="fixed z-10"
 		style:left={`${rect.left}px`}
 		style:top={`${rect.top}px`}
 		style:width={`${rect.width}px`}
@@ -77,11 +77,11 @@
 					{#if aboutIsOpen}
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<!-- svelte-ignore a11y-no-static-element-interactions -->
-						<div class="absolute inset-0 z-10" on:click={() => (aboutIsOpen = false)} />
+						<div class="absolute inset-0 z-20" on:click={() => (aboutIsOpen = false)} />
 					{/if}
 
 					<div
-						class="absolute bottom-0 z-20 h-[48vh] overflow-y-auto bg-bg-primary p-6 transition-transform duration-300 ease-in-out scrollbar-none landscape:hidden"
+						class="absolute bottom-0 z-30 h-[48vh] overflow-y-auto bg-bg-primary p-6 transition-transform duration-300 ease-in-out scrollbar-none landscape:hidden"
 						style:transform={`translateY(${!aboutIsOpen ? 100 : 0}%)`}
 						style:pointer-events={!aboutIsOpen ? 'none' : 'auto'}
 					>
