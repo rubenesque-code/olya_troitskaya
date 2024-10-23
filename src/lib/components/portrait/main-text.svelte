@@ -1,5 +1,16 @@
+<script lang="ts">
+	export let height: number;
+
+	let container: HTMLDivElement;
+
+	$: if (container && typeof height !== 'number') {
+		height = container.getBoundingClientRect().height;
+	}
+</script>
+
 <div
-	class="flex h-full flex-col text-[16px] leading-relaxed xs:text-[17px] xs/sm:text-[19px] sm:text-[21px] sm/md:text-[22px] md:text-[23px]"
+	class="full flex flex-col text-[16px] leading-relaxed xs:text-[17px] xs/sm:text-[19px] sm:text-[21px] sm/md:text-[22px] md:text-[23px]"
+	bind:this={container}
 >
 	<div>
 		<p>

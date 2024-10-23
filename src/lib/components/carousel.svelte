@@ -159,7 +159,7 @@
 
 		<button
 			class="absolute right-0 top-0 z-10 h-full w-1/2 cursor-none"
-			on:click={() => handleInteraction('prev')}
+			on:click={() => handleInteraction('next')}
 			on:mouseenter={() => (mouseInRightHalf = true)}
 			on:mouseleave={() => (mouseInRightHalf = false)}
 			on:mousemove={(e) => {

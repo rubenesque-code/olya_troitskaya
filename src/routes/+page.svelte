@@ -6,6 +6,9 @@
 	import { contact } from '^data';
 
 	// TO DO
+	// - loading bg
+	// - sizes
+	// - alt from file name?
 
 	// MAYBE
 	// - lossless
@@ -17,6 +20,7 @@
 
 	// NICE TO HAVE
 	// fast but not so fast transition on 0 or end slide
+	// remount carousel on page size change
 
 	// CHECKLIST
 	// - slide counter timer
@@ -48,6 +52,8 @@
 			: landscapeMountPoint;
 
 	$: rect = activePoint?.getBoundingClientRect();
+
+	let aboutMaxHeight: number;
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} bind:innerHeight={windowHeight} />
@@ -60,7 +66,7 @@
 		style:width={`${rect.width}px`}
 		style:height={`${rect.height}px`}
 	>
-		<Carousel bind:activeIndex hideSlideCounter={aboutIsOpen} pause={aboutIsOpen} />
+		<Carousel bind:activeIndex pause={aboutIsOpen} />
 	</div>
 {/if}
 
@@ -78,11 +84,12 @@
 					{/if}
 
 					<div
-						class="absolute bottom-0 z-30 h-[48vh] overflow-y-auto bg-bg-primary p-6 transition-transform duration-300 ease-in-out scrollbar-none landscape:hidden"
+						class="absolute bottom-0 z-30 box-content h-[48vh] overflow-y-auto bg-bg-primary p-6 transition-transform duration-300 ease-in-out scrollbar-none landscape:hidden"
 						style:transform={`translateY(${!aboutIsOpen ? 100 : 0}%)`}
 						style:pointer-events={!aboutIsOpen ? 'none' : 'auto'}
+						style:max-height={!aboutMaxHeight ? 'auto' : `${aboutMaxHeight}px`}
 					>
-						<PortraitMainText />
+						<PortraitMainText bind:height={aboutMaxHeight} />
 					</div>
 				</div>
 
@@ -106,10 +113,8 @@
 						href={`mailto:${contact.email}`}>Contact</a
 					>
 
-					<div class="flex w-full flex-grow flex-col justify-center p-4">
-						<div class="h-full max-h-[1200px]">
-							<div class="h-full w-full" bind:this={landscapeMountPoint} />
-						</div>
+					<div class="flex w-full flex-grow flex-col justify-center">
+						<div class="h-full w-full" bind:this={landscapeMountPoint} />
 					</div>
 
 					<div>
