@@ -11,11 +11,41 @@
 		delayAfterInteraction: 7000,
 		delayAfterPause: 900
 	};
+
+	/* 	const onChangeImage = (
+		{
+			activeIndex,
+			loadedImages
+		}: {
+			activeIndex: number;
+			loadedImages: number[];
+			trigger: number;
+		},
+		{ onLoadImage }: { onLoadImage: () => void }
+	) => {
+		if (loadedImages.includes(activeIndex)) return;
+
+		onLoadImage();
+	}; */
 </script>
 
 <script lang="ts">
 	export let pause = false;
 	export let activeIndex: number;
+
+	/* 	let pauseOnNotLoaded = false;
+
+	let numLoadedImages = 0;
+	let loadedImages: number[] = [];
+
+	$: onChangeImage(
+		{ activeIndex, loadedImages, trigger: numLoadedImages },
+		{
+			onLoadImage: () => {
+				console.log('ON LOAD IMAGE');
+			}
+		}
+	); */
 
 	let direction: 'prev' | 'next' = 'next';
 
@@ -185,8 +215,17 @@
 			style:transform={`translateX(-${activeIndex * 100}%)`}
 		>
 			{#each images as image}
-				<div class="h-full w-full shrink-0">
-					<Picture imageClass="w-full h-full object-contain" sizes="50vw" data={image} alt="" />
+				<div class="relative h-full w-full shrink-0">
+					<Picture
+						imageClass="w-full h-full object-contain absolute inset-0 z-10"
+						data={image}
+						sizes="(orientation: landscape) 80vw, (orientation: portrait) 100vw"
+						alt=""
+					/>
+
+					<p class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-sm">
+						Loading image...
+					</p>
 				</div>
 			{/each}
 		</div>

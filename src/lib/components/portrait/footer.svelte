@@ -12,7 +12,7 @@
 <footer
 	class="fixed bottom-0 z-40 flex w-full items-center justify-between bg-bg-primary px-6 py-6 text-[16px] decoration-2 underline-offset-2 xs:text-[17px] xs/sm:text-[19px] sm:text-[21px] sm/md:text-[22px] md:text-[23px] landscape:hidden"
 >
-	<div class="absolute left-1/2 top-0 z-10 -translate-x-1/2">
+	<div class="absolute left-1/2 top-[1px] z-10 -translate-x-1/2">
 		<p class="text-[11px] sm/md:text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[15px]">
 			{activeIndex + 1} / {images.length}
 		</p>

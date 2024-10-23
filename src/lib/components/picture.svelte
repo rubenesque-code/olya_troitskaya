@@ -29,6 +29,17 @@
 
 	let loadingComplete = false;
 
+	/* 	$: if (imgNode) {
+		if (imgNode.complete) {
+			loadingComplete = true;
+			onLoad();
+		}
+		imgNode.onload = () => {
+			loadingComplete = true;
+			onLoad();
+		};
+	} */
+
 	onMount(() => {
 		if (!imgNode) {
 			return;
@@ -36,7 +47,6 @@
 		if (imgNode.complete) {
 			loadingComplete = true;
 			onLoad();
-			return;
 		}
 		imgNode.onload = () => {
 			loadingComplete = true;

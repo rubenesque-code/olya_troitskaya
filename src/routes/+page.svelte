@@ -6,12 +6,11 @@
 	import { contact } from '^data';
 
 	// TO DO
-	// - loading bg
-	// - sizes
-	// - alt from file name?
 
 	// MAYBE
+	// - pause on image not loaded
 	// - lossless
+	// - alt from file name?
 	// - max size for certain images?
 	// - max size for all images?
 
@@ -84,10 +83,10 @@
 					{/if}
 
 					<div
-						class="absolute bottom-0 z-30 box-content h-[48vh] overflow-y-auto bg-bg-primary p-6 transition-transform duration-300 ease-in-out scrollbar-none landscape:hidden"
+						class="absolute -bottom-[1px] z-30 box-content h-[48vh] overflow-y-auto bg-bg-primary p-6 transition-transform duration-300 ease-in-out scrollbar-none landscape:hidden"
 						style:transform={`translateY(${!aboutIsOpen ? 100 : 0}%)`}
 						style:pointer-events={!aboutIsOpen ? 'none' : 'auto'}
-						style:max-height={!aboutMaxHeight ? 'auto' : `${aboutMaxHeight}px`}
+						style:max-height={!aboutMaxHeight ? 'auto' : `${aboutMaxHeight + 1}px`}
 					>
 						<PortraitMainText bind:height={aboutMaxHeight} />
 					</div>
