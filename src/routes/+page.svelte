@@ -8,6 +8,7 @@
 	// TO DO
 
 	// MAYBE
+	// - lossless
 	// - max size for certain images?
 	// - max size for all images?
 
@@ -16,7 +17,6 @@
 
 	// NICE TO HAVE
 	// fast but not so fast transition on 0 or end slide
-	// after, pause wait time left
 
 	// CHECKLIST
 	// - slide counter timer
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 
-				<Footer bind:aboutIsOpen />
+				<Footer bind:aboutIsOpen {activeIndex} />
 			</main>
 		{/if}
 

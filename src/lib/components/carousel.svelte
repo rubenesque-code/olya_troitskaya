@@ -1,6 +1,5 @@
 <script lang="ts" context="module">
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
 	import { swipe } from 'svelte-gestures';
 
 	import images from '^content/image-carousel';
@@ -15,7 +14,6 @@
 </script>
 
 <script lang="ts">
-	export let hideSlideCounter = false;
 	export let pause = false;
 	export let activeIndex: number;
 
@@ -108,11 +106,11 @@
 		intervalIds.push(intervalId);
 	};
 
-	let leftHalf: HTMLButtonElement;
-	$: leftRect = leftHalf?.getBoundingClientRect();
-
 	let mouseX: number;
 	let mouseY: number;
+
+	let leftHalf: HTMLButtonElement;
+	$: leftRect = leftHalf?.getBoundingClientRect();
 
 	let mouseInLeftHalf = false;
 
@@ -136,7 +134,7 @@
 	}}
 >
 	<div class="relative h-full w-full overflow-hidden">
-		<!-- 		<button
+		<button
 			class="absolute left-0 top-0 z-10 h-full w-1/2 cursor-none"
 			on:click={() => handleInteraction('prev')}
 			on:mouseenter={() => (mouseInLeftHalf = true)}
@@ -180,7 +178,7 @@
 					<img src="right-arrow.png" alt="mouse cursor as right arrow" />
 				</div>
 			{/if}
-		</button> -->
+		</button>
 
 		<div
 			class="absolute inset-0 flex h-full w-full transition-transform duration-300 ease-linear"
@@ -194,11 +192,9 @@
 		</div>
 	</div>
 
-	{#if !hideSlideCounter}
-		<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full" transition:fade>
-			<p class="text-[11px] sm/md:text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[15px]">
-				{activeIndex + 1} / {images.length}
-			</p>
-		</div>
-	{/if}
+	<div class="absolute -bottom-2 left-1/2 z-10 -translate-x-1/2 translate-y-full portrait:hidden">
+		<p class="text-[11px] sm/md:text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[15px]">
+			{activeIndex + 1} / {images.length}
+		</p>
+	</div>
 </div>
