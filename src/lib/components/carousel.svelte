@@ -21,29 +21,32 @@
 
 	let direction: 'prev' | 'next' = 'next';
 
-	let intervalId: number | null;
+	let intervalIds: number[] = [];
 
 	onMount(() => {
-		console.log('===============================');
+		/* 		console.log('===============================');
 		console.log('MOUNT');
-		console.log('===============================');
+		console.log('==============================='); */
 
-		intervalId = setInterval(() => {
-			console.log('MOUNT ---> INTERVAL ---> GO ');
+		const intervalId = setInterval(() => {
+			// console.log('MOUNT ---> INTERVAL ---> GO ');
 			goNext();
 		}, config.interval);
+
+		intervalIds.push(intervalId);
 	});
 
 	let pauseFlag: 'was paused' | 'idle' = 'idle';
 
 	$: if (pause) {
-		if (intervalId) {
-			console.log('===============================');
+		if (intervalIds.length) {
+			/* 			console.log('===============================');
 			console.log('PAUSE');
-			console.log('===============================');
+			console.log('==============================='); */
 
-			clearInterval(intervalId);
-			intervalId = null;
+			intervalIds.forEach((intervalId) => clearInterval(intervalId));
+
+			intervalIds = [];
 
 			pauseFlag = 'was paused';
 		}
@@ -51,23 +54,20 @@
 
 	// play after pause
 	$: if (!pause && pauseFlag === 'was paused') {
-		console.log('===============================');
+		/* 		console.log('===============================');
 		console.log('WAS PAUSED');
-		console.log('===============================');
+		console.log('==============================='); */
 
 		pauseFlag = 'idle';
 
-		setTimeout(() => {
+		const intervalId = setInterval(() => {
+			// console.log('WAS PAUSED ---> INTERVAL ---> GO');
+
 			if (direction === 'next') goNext();
 			else goPrev();
+		}, config.interval);
 
-			intervalId = setInterval(() => {
-				console.log('WAS PAUSED ---> SET INTERVAL ---> GO');
-
-				if (direction === 'next') goNext();
-				else goPrev();
-			}, config.interval);
-		}, config.delayAfterPause);
+		intervalIds.push(intervalId);
 	}
 
 	const goNext = () => {
@@ -79,15 +79,16 @@
 	};
 
 	const handleInteraction = (type: 'prev' | 'next') => {
-		console.log('===============================');
+		/* 		console.log('===============================');
 		console.log('HANDLE INTERACTION', type);
-		console.log('===============================');
+		console.log('==============================='); */
 
-		if (intervalId) {
-			console.log('HANDLE INTERACTION ---> CLEAR INTERVAL', intervalId);
+		if (intervalIds.length) {
+			// console.log('HANDLE INTERACTION ---> CLEAR INTERVAL');
 
-			clearInterval(intervalId);
-			intervalId = null;
+			intervalIds.forEach((intervalId) => clearInterval(intervalId));
+
+			intervalIds = [];
 		}
 
 		direction = type;
@@ -98,14 +99,27 @@
 			goNext();
 		}
 
-		setTimeout(() => {
-			intervalId = setInterval(() => {
-				console.log('HANDLE INTERACTION ---> SET_INTERVAL -> GO');
-				if (direction === 'next') goNext();
-				else goPrev();
-			}, config.interval);
-		}, config.delayAfterInteraction);
+		const intervalId = setInterval(() => {
+			// console.log('HANDLE INTERACTION ---> SET_INTERVAL -> GO');
+			if (direction === 'next') goNext();
+			else goPrev();
+		}, config.interval);
+
+		intervalIds.push(intervalId);
 	};
+
+	let leftHalf: HTMLButtonElement;
+	$: leftRect = leftHalf?.getBoundingClientRect();
+
+	let mouseX: number;
+	let mouseY: number;
+
+	let mouseInLeftHalf = false;
+
+	let rightHalf: HTMLButtonElement;
+	$: rightRect = rightHalf?.getBoundingClientRect();
+
+	let mouseInRightHalf = false;
 </script>
 
 <div
@@ -122,16 +136,51 @@
 	}}
 >
 	<div class="relative h-full w-full overflow-hidden">
-		<button
-			class="absolute left-0 top-0 z-10 h-full w-1/2"
+		<!-- 		<button
+			class="absolute left-0 top-0 z-10 h-full w-1/2 cursor-none"
 			on:click={() => handleInteraction('prev')}
+			on:mouseenter={() => (mouseInLeftHalf = true)}
+			on:mouseleave={() => (mouseInLeftHalf = false)}
+			on:mousemove={(e) => {
+				if (!leftRect) {
+					return;
+				}
+
+				mouseX = e.clientX - leftRect.left;
+				mouseY = e.clientY - leftRect.top;
+			}}
+			bind:this={leftHalf}
 			type="button"
-		/>
+		>
+			{#if mouseInLeftHalf}
+				<div class="absolute z-50 h-[52px] w-[52px]" style="left: {mouseX}px; top: {mouseY}px;">
+					<img src="left-arrow.png" alt="mouse cursor as left arrow" />
+				</div>
+			{/if}
+		</button>
+
 		<button
-			class="absolute right-0 top-0 z-10 h-full w-1/2"
-			on:click={() => handleInteraction('next')}
+			class="absolute right-0 top-0 z-10 h-full w-1/2 cursor-none"
+			on:click={() => handleInteraction('prev')}
+			on:mouseenter={() => (mouseInRightHalf = true)}
+			on:mouseleave={() => (mouseInRightHalf = false)}
+			on:mousemove={(e) => {
+				if (!rightRect) {
+					return;
+				}
+
+				mouseX = e.clientX - rightRect.left;
+				mouseY = e.clientY - rightRect.top;
+			}}
+			bind:this={rightHalf}
 			type="button"
-		/>
+		>
+			{#if mouseInRightHalf}
+				<div class="absolute z-50 h-[52px] w-[52px]" style="left: {mouseX}px; top: {mouseY}px;">
+					<img src="right-arrow.png" alt="mouse cursor as right arrow" />
+				</div>
+			{/if}
+		</button> -->
 
 		<div
 			class="absolute inset-0 flex h-full w-full transition-transform duration-300 ease-linear"

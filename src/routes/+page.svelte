@@ -6,8 +6,6 @@
 	import { contact } from '^data';
 
 	// TO DO
-	// - carousel not working properly
-	// - structured data.
 
 	// MAYBE
 	// - max size for certain images?
@@ -17,7 +15,6 @@
 	// - pause button
 
 	// NICE TO HAVE
-	// arrows for left right
 	// fast but not so fast transition on 0 or end slide
 	// after, pause wait time left
 
